@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Words or Less</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "confetti": "https://cdn.skypack.dev/canvas-confetti"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div id="home-screen" class="screen active">
+            <h1>3 Words or Less</h1>
+            <div class="instructions">
+                <h2>How to Play</h2>
+                <ol>
+                    <li>The game selects 5 random words from the word bank.</li>
+                    <li>For each word, the player must give clues using THREE words or less.</li>
+                    <li>The host controls the game by clicking Correct, Pass, or Fault.</li>
+                    <li>Passed words will return later in the round.</li>
+                    <li>You have 2 minutes to guess all words. Try to finish before time runs out!</li>
+                </ol>
+                <h2>_</h2>
+                <h2>Game Setup for Host</h2>
+                <ol>
+                    <li>A tablet computer, laptop, or desktop should be ready and visible to the host and glue-giver.</li>
+                    <li>Word guessers are seated opposite the clue-giver.</li>
+                </ol>   
+            </div>
+            <div class="button-container">
+                <button id="start-game-btn" class="btn">Start Game</button>
+                <button id="settings-btn" class="btn">Settings</button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="timer">Time Remaining: <span id="timer-display">02:00</span></div>
+                <div class="words-remaining">Words Remaining: <span id="words-remaining">5</span></div>
+            </div>
+            <div class="bank-display">Current Bank: <span id="current-bank">Movers</span></div>
+            <div class="word-display">
+                <h2 id="current-word">Word will appear here</h2>
+            </div>
+            <div class="controls">
+                <button id="correct-btn" class="btn">Correct</button>
+                <button id="pass-btn" class="btn">Pass</button>
+                <button id="fault-btn" class="btn">Fault</button>
+            </div>
+            <button id="back-to-home" class="btn secondary">Back to Home</button>
+        </div>
+
+        <div id="end-screen" class="screen">
+            <h1>Game Over!</h1>
+            <div class="results">
+                <p id="game-result">All words completed!</p>
+                <p>Remaining Time: <span id="final-time">00:00</span></p>
+            </div>
+            <button id="play-again-btn" class="btn">Play Again</button>
+            <button id="home-btn" class="btn secondary">Back to Home</button>
+        </div>
+
+        <div class="footer">
+            <span>Released on March 16, 2025.</span>
+            <a href="https://sites.google.com/view/aaronshi/" target="_blank">
+                <img src="https://alittlemoreenglish.weebly.com/uploads/2/6/6/3/26638990/favicon-32x32_orig.png" alt="Website">
+            </a>
+        </div>
+
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <h2>Game Settings</h2>
+                <div class="setting-section">
+                    <h3>Word Bank</h3>
+                    <div class="word-bank-options">
+                        <div>
+                            <input type="radio" id="built-in" name="word-bank-type" value="built-in" checked>
+                            <label for="built-in">Built-in Word Bank</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="custom" name="word-bank-type" value="custom">
+                            <label for="custom">Custom Word Bank</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-section" id="difficulty-section">
+                    <h3>Difficulty Level</h3>
+                    <div class="difficulty-options">
+                        <div>
+                            <input type="radio" id="starters" name="difficulty-level" value="starters">
+                            <label for="starters">Starters (Easy)</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="movers" name="difficulty-level" value="movers" checked>
+                            <label for="movers">Movers (Medium)</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="flyers" name="difficulty-level" value="flyers">
+                            <label for="flyers">Flyers (Difficult)</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="custom-word-bank-section" class="setting-section hidden">
+                    <h3>Custom Words</h3>
+                    <p>Enter at least 5 words or phrases, one per line:</p>
+                    <textarea id="custom-words" rows="10" placeholder="apple
+mountain
+basketball
+sunshine
+elephant"></textarea>
+                    <p class="word-count">Words: <span id="word-count">0</span>/5 minimum</p>
+                </div>
+                <div class="button-container">
+                    <button id="save-settings-btn" class="btn">Save Settings</button>
+                    <button id="cancel-settings-btn" class="btn secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+</html>
