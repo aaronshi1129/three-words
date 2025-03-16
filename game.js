@@ -34,7 +34,7 @@ const WordBanks = {
             "fireworks", "pineapple", "lighthouse", "werewolf", "hurricane",
             "ripple", "counter", "pore", "dramatic", "siren",
             "borrow", "logo", "shack", "digit", "margarita",
-            "tease, "crowded", "triathlon", "Snickers", "jade",
+            "tease", "crowded", "triathlon", "Snickers", "jade",
             "blonde", "champion", "Atlanta", "mozzarella", "lark",
             "hummingbird", "referee", "group", "enlist", "rolling stone",
             "magnify", "magnifier", "telescope", "microscope", "binoculars",
