@@ -1,17 +1,15 @@
 import confetti from 'confetti';
 
-// Game configuration and state
 const GameState = {
     words: [],
     currentWordIndex: 0,
     passedWords: [],
     startTime: null,
     timerInterval: null,
-    remainingTime: 120, // 2 minutes in seconds
+    remainingTime: 120, 
     isGameActive: false
 };
 
-// Word banks
 const WordBanks = {
     builtIn: {
         starters: [
@@ -23,7 +21,7 @@ const WordBanks = {
             "simple", "perfect", "clock", "again", "mile", "kilogram", "valentine", "independence", "gender", "label",
             "bookstore", "supermarket", "grocery store", "fat", "sexy", "meat", "window", "fridge", "late", "early",
             "liar", "December", "Friday", "weekend", "ride", "flour", "save", "Spring", "engine", "heat",
-            "hungry", "author", "song", "expensive", "sky", "hell", "broken", "Uber", "tortoise", "piece",
+            "hungry", "author", "song", "expensive", "sky", "hell", "broken", "Uber", "tortoise", "piece", "igloo",
             "toy", "school", "ice cream", "banana", "monkey", "chicken", "pizza", "milk", "bear", "bed"
         ],
         movers: [
@@ -44,8 +42,8 @@ const WordBanks = {
             "villain", "kidnap", "PowerPoint", "wasabi", "mustard",
             "decoration", "obese", "bald", "delta", "applaud",
             "shadow", "angle", "stepfather", "aquarius", "stall",
-            "strike", "lyric", "pricy", "curious", "good game",
-            "price", "official", "tune", "helmet", "menu",
+            "strike", "lyric", "pricy", "curious", "good game", "zombie",
+            "price", "official", "tune", "helmet", "menu", "tip", "original", "rash", "roll",
             "jellyfish", "rollercoaster", "snowflake", "avocado", "rhinoceros"
         ],
         flyers: [
@@ -66,15 +64,14 @@ const WordBanks = {
             "crop dust", "hymn", "thigh", "mule", "standing room",
             "house call", "co-sign", "no cap", "slumber party", "leapfrog",
             "baby formula", "ugli fruit", "no-hitter", "hot pink", "true crime",
-            "futon", "dirt cheap", "boon", "curse", "photography",
-            "sit in", "veto", "opinion poll", "placard", "report card",
-            "democracy", "colonialism", "globalization", "relativity", "consciousness"
+            "futon", "dirt cheap", "boon", "curse", "photography", "Minesweeper",
+            "sit in", "veto", "opinion poll", "placard", "report card", "gratuity", "flex", "treason", "Solitaire", "Sudoku",
+            "democracy", "colonialism", "globalization", "relativity", "locket", "consciousness"
         ]
     },
     custom: []
 };
 
-// DOM Elements
 const elements = {
     screens: {
         home: document.getElementById('home-screen'),
@@ -106,13 +103,11 @@ const elements = {
     currentBank: document.getElementById('current-bank')
 };
 
-// Initialize the game
 function init() {
     loadSettings();
     addEventListeners();
 }
 
-// Load settings from local storage
 function loadSettings() {
     const savedCustomWords = localStorage.getItem('customWordBank');
     if (savedCustomWords) {
@@ -135,45 +130,36 @@ function loadSettings() {
     document.getElementById(difficultyLevel).checked = true;
 }
 
-// Set up event listeners
 function addEventListeners() {
-    // Navigation buttons
     elements.buttons.startGame.addEventListener('click', startGame);
     elements.buttons.settings.addEventListener('click', openSettings);
     elements.buttons.backToHome.addEventListener('click', goToHome);
     elements.buttons.playAgain.addEventListener('click', startGame);
     elements.buttons.home.addEventListener('click', goToHome);
 
-    // Game control buttons
     elements.buttons.correct.addEventListener('click', handleCorrect);
     elements.buttons.pass.addEventListener('click', handlePass);
     elements.buttons.fault.addEventListener('click', handleFault);
 
-    // Settings modal buttons
     elements.buttons.saveSettings.addEventListener('click', saveSettings);
     elements.buttons.cancelSettings.addEventListener('click', closeSettings);
 
-    // Word bank type radio buttons
     for (const radio of elements.wordBankType) {
         radio.addEventListener('change', toggleCustomWordBank);
     }
 
-    // Custom words textarea
     elements.customWords.addEventListener('input', updateWordCount);
 
-    // Difficulty level radio buttons
     for (const radio of elements.difficultyLevel) {
         radio.addEventListener('change', () => {});
     }
 }
 
-// Word count update
 function updateWordCount() {
     const words = elements.customWords.value.trim().split('\n').filter(word => word.trim().length > 0);
     elements.wordCount.textContent = words.length;
 }
 
-// Toggle custom word bank section
 function toggleCustomWordBank() {
     if (document.getElementById('custom').checked) {
         elements.customWordBankSection.classList.remove('hidden');
@@ -184,17 +170,14 @@ function toggleCustomWordBank() {
     }
 }
 
-// Open settings modal
 function openSettings() {
     elements.settingsModal.style.display = 'flex';
 }
 
-// Close settings modal
 function closeSettings() {
     elements.settingsModal.style.display = 'none';
 }
 
-// Save settings
 function saveSettings() {
     const isCustom = document.getElementById('custom').checked;
     
@@ -214,7 +197,6 @@ function saveSettings() {
     
     localStorage.setItem('wordBankType', isCustom ? 'custom' : 'built-in');
     
-    // Save difficulty level
     const difficultyLevel = document.querySelector('input[name="difficulty-level"]:checked').value;
     localStorage.setItem('difficultyLevel', difficultyLevel);
     
